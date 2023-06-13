@@ -1,16 +1,20 @@
 clear; close all; clc;
 
-load training_data/state_data.mat;
+
 load training_results/actor_critic.mat
 
-
-[Kopt, Popt] = dlqr(A,B,Q,R);
 
 A = [  0,      1;...
        -1,    1.99   ];
 
 B = [  1;...
        1  ];
+
+state_dim = size(A,1);
+control_dim = size(B,2);
+
+Q = 1*eye(state_dim);
+R = 1*eye(control_dim);
    
 x0 = [1;5];
 x1 = [0.1;0.5];
@@ -27,7 +31,7 @@ uu_net = [];
 
 Jreal = 0;
 
-Fsamples = 400;
+Fsamples = 300;
 h = waitbar(0,'Please wait');
 for k = 1:Fsamples
     x = A*x;
@@ -51,7 +55,12 @@ xlabel('Time steps');
 ylabel('States'); 
 set(gca,'FontName','Times New Roman','FontSize',14,'linewidth',1);
 grid on;
-
+figure,
+plot(0:Fsamples-1,uu_net,'r--','linewidth',1)
+xlabel('Time steps');
+ylabel('Control');
+set(gca,'FontName','Times New Roman','FontSize',14,'linewidth',1);
+grid on;
 
 
 

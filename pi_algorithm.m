@@ -1,16 +1,11 @@
 function pi_algorithm
-% This demo checks the feasibility of the policy iteration adaptive dynamic 
-% programming  algorithm
-
-% By J. Lu
-% Date: Apr. 21, 2020 
 
 %-------------------------------- start -----------------------------------
 clear; close all; clc;
 
 global R; global Q;global A; global B;
 
-% information of system & cost function
+% information of system 
 
 A = [  0,      1;...
        -1,    1.99   ];
@@ -22,7 +17,6 @@ x0 = [1;-1];
 
 
 % action network
-
 actor_middle_num = 15;
 actor_epoch = 5000;
 actor_err_goal = 1e-9;
@@ -80,7 +74,6 @@ h = waitbar(0,'Please wait');
 for i = 1:epoch
     % update critic
     % evaluate policy
-    
     critic_target = evaluate_policy(actor, e_train, x_tr, x_ta, eval_step);
     critic = train(critic,e_train,critic_target);  
     
@@ -131,12 +124,14 @@ for k = 1:eval_step
 end
 y = critic_target;
 end
+
 %--------------------------- output of system ----------------------------
 function y = controlled_system(x_tr,x_ta,u)
 global A; global B;
 % system matrices
-y = A*x_ta + B*u - A*x_tr;  % dot product should be adopt in nolinear systems
+y = A*x_ta + B*u - A*x_tr;  
 end
+
 %----------------------------- cost function ------------------------------
 function y = cost_function(e,u)
 global R; global Q;
