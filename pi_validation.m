@@ -17,7 +17,7 @@ Q = 1*eye(state_dim);
 R = 1*eye(control_dim);
    
 x0 = [1;5];
-x1 = [0.1;0.5];
+x1 = [1;2];
 
 x = x0;
 x_net = x1;
