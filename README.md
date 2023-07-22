@@ -20,3 +20,6 @@ The evaluate_policy function evaluates the policy defined by the actor network b
 The controlled_system function calculates the output of the control system for a given agent state, reference state, and control input. It uses the system matrices A and B.
 
 The cost_function function calculates the cost function value for a given error (e) and control input (u). It uses the weight matrices Q and R.
+
+reference:
+https://ieeexplore.ieee.org/document/7434032
